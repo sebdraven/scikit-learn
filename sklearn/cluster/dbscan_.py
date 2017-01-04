@@ -247,13 +247,11 @@ class DBSCAN(BaseEstimator, ClusterMixin):
     and Data Mining, Portland, OR, AAAI Press, pp. 226-231. 1996
     """
 
-    def __init__(self, eps=0.5, min_samples=5, metric='euclidean',
-                 metric_params=None, algorithm='auto', leaf_size=30, p=None,
+    def __init__(self, eps=0.5, min_samples=5, metric='euclidean', algorithm='auto', leaf_size=30, p=None,
                  n_jobs=1):
         self.eps = eps
         self.min_samples = min_samples
         self.metric = metric
-        self.metric_params = metric_params
         self.algorithm = algorithm
         self.leaf_size = leaf_size
         self.p = p
