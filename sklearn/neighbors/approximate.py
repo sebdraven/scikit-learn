@@ -308,7 +308,7 @@ class LSHForest(BaseEstimator, KNeighborsMixin, RadiusNeighborsMixin):
         total_candidates = np.array([], dtype=int)
         total_neighbors = np.array([], dtype=int)
         total_distances = np.array([], dtype=float)
-
+        cmpt=0
         while (max_depth > self.min_hash_match and
                ratio_within_radius > threshold):
             left_mask = self._left_mask[max_depth]
@@ -332,6 +332,7 @@ class LSHForest(BaseEstimator, KNeighborsMixin, RadiusNeighborsMixin):
             ratio_within_radius = (total_neighbors.shape[0] /
                                    float(total_candidates.shape[0]))
             max_depth = max_depth - 1
+
         return total_neighbors, total_distances
 
     def fit(self, X, y=None):
@@ -500,7 +501,9 @@ class LSHForest(BaseEstimator, KNeighborsMixin, RadiusNeighborsMixin):
                                                        bin_queries[i], radius)
             neighbors.append(neighs)
             distances.append(dists)
-
+            if i % 1000 == 0:
+                print(len(neighbors))
+                print(len(distances))
         if return_distance:
             return _array_of_arrays(distances), _array_of_arrays(neighbors)
         else:
